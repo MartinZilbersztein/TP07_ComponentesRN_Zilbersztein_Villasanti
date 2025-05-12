@@ -11,6 +11,8 @@ export default function App() {
   }
   const cambiarFondo = ()=>{
   }
+  const presionado = (presion) => {
+  }
   return (
     <ImageBackground style={styles.container} resizeMode='cover' source={{uri: 'https://media.istockphoto.com/id/1362473128/es/vector/viejo-r%C3%BAstico-sucio-desordenado-desgastado-escala-de-grises-claro-o-blanco-color-grunge.jpg?s=612x612&w=0&k=20&c=hEF1k6eMGmIETny4tE9irRSqQrnG07m_CL7k2MFCF3s='}}>
       <SafeAreaView style={styles.view} id='mainContainer'>
@@ -21,7 +23,7 @@ export default function App() {
         <TouchableOpacity style={styles.touchableOpacity} onPress={alertar}>
           <Text style={[styles.botonTexto, {color: 'white'}]}>Contactar</Text>
         </TouchableOpacity>
-        <Pressable style={[styles.pressable, styles.entrada]} onPress={cambiarFondo}>
+        <Pressable style={[styles.pressable, styles.entrada]} onPressIn={() => presionado(true)} onPressOut={() => presionado(false)} onPress={cambiarFondo}>
           <Text style={styles.botonTexto}>Ver portfolio</Text>
         </Pressable>
         <StatusBar style="auto" />
