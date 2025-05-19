@@ -1,44 +1,33 @@
 import { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, TextInput, View, TouchableOpacity, Alert, Pressable, Text } from 'react-native';
+import { Button } from 'react-native-paper';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function Tarjeta(){
   const [text, useText] = useState("");
-    const fotoPerfil= require('./fotoPerfil.jpg');
-    const github = require('./github.png');
-    const email = {uri:'https://static.vecteezy.com/system/resources/previews/021/454/517/non_2x/email-confirmation-app-icon-email-icon-free-png.png'};
-    const linkedin = {uri: 'https://commons.wikimedia.org/wiki/File:LinkedIn_logo_initials.png'};
-    const telefono = {uri:'https://cdn-icons-png.flaticon.com/512/684/684853.png'};
-    const alertar = ()=>{
-      console.log("hola"); 
-      Alert.alert(text);//NO USAR ALERT
-    }
-    const cambiarFondo = ()=>{
-    }
-    const presionado = (presion) => {
-      styles.pressable={
-        backgroundColor:"black" 
-      }
-    }
+  const [color, setColor] = useState('white');
+  const fotoPerfil= require('./fotoPerfil.jpg');
+  const alertar = ()=>{
+    Alert.alert(text);//NO USAR ALERT
+  }
   return (
     <>
       <Image source={fotoPerfil} style={styles.Image}/>
-      <Text style={{fontSize:25, fontFamily:'times new roman'}}>Martín Zilbersztein</Text>
+      <Text style={{fontSize:25, fontFamily:'times new roman', fontWeight:'bold', marginTop:10}}>Martín Zilbersztein</Text>
       <Text style={{fontSize:20, fontStyle:'italic'}}>Frontend developer</Text>
       <View style={styles.view}>
-        <Image source={github} style={styles.imagenesRedes} />
-        <Image source={linkedin} style={styles.imagenesRedes} />
-        <Image source={email} style={styles.imagenesRedes} />
-        <Image source={telefono} style={styles.imagenesRedes} />
+        <AntDesign name="github" size={34} color="black" />
+        <AntDesign name="linkedin-square" size={34} color="black" style={{marginLeft:'10%'}}/>
+        <AntDesign name="mail" size={34} color="black" style={{marginLeft:'10%'}}/>
+        <AntDesign name="phone" size={34} color="black" style={{marginLeft:'10%'}}/>
       </View>
       <TextInput style={[styles.textInput, styles.entrada]} placeholder='Enter a message' onChangeText={useText} value={text}/>
       <TouchableOpacity style={styles.touchableOpacity} onPress={alertar}>
         <Text style={[styles.botonTexto, {color: 'white'}]}>Contactar</Text>
       </TouchableOpacity>
-      <Pressable style={[styles.pressable, styles.entrada]} onPressIn={() => presionado(true)} onPressOut={() => presionado(false)} onPress={cambiarFondo}>
-        <Text style={styles.botonTexto}>Ver portfolio</Text>
-      </Pressable>
-      <StatusBar style="auto" />
+      <Button mode="contained" style={styles.pressable} onPressIn={() => setColor('cyan')} onPressOut={() => setColor('white')}>
+        <Text style={[styles.botonTexto, {color: color}]}>Ver portfolio</Text>
+      </Button>
     </>
   );
 }
@@ -46,10 +35,9 @@ export default function Tarjeta(){
 const styles = StyleSheet.create({
   view:{
     display: 'flex',
-    width:'100%',
-    height:'10%',
     flexDirection: 'row',
-    justifyContent:'center'
+    justifyContent:'center',
+    marginTop: '5%'
   },
   Image:{
     height:'30%',
@@ -84,14 +72,10 @@ const styles = StyleSheet.create({
   },
   pressable:{
     marginTop:10,
-    backgroundColor:'white',
     width: '80%',
     height: '10%',
     justifyContent:'center',
-    alignItems:'center'
-  },
-  imagenesRedes:{
-    width:'20%',
-    height: '70%'
+    alignItems:'center',
+    borderRadius:10
   }
 });
